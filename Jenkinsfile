@@ -3,22 +3,22 @@ pipeline {
     tools { jdk 'JDK_8' }
     stages {
         stage('vsc') {
-            step {
+            steps {
                 git branch: 'master', url: 'https://github.com/UrvashiHarode1432/game-of-life.git'
             }
         }
         stage('build') {
-            step {
+            steps {
                 sh script: 'mvn package'
             }
         }
         stage('artifacts') {
-            step {
+            steps {
                 archiveArtifacts artifacts: '**/gameoflife.war'
             }
         }
         stage('junit') {
-            step {
+            steps {
                 junit testResults: '**/surefire-reports/TEST-*.xml'
             }
         }
